@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M. Asim Shakir | Portfolio</title>
+    <title>| M. Asim Shakir</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ===== RESET & BASE STYLES ===== */
@@ -41,7 +41,7 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+            transition: opacity 0.5s, visibility 0.5s;
         }
 
         .loader-container.hidden {
@@ -109,20 +109,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        .loading-text {
-            color: #667eea;
-            margin-top: 2rem;
-            font-size: 1.2rem;
-            font-weight: 500;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
         /* ===== MAIN CONTENT AREA ===== */
         .main-content {
             padding: 20px;
@@ -130,22 +116,7 @@
             margin: 0 auto;
             position: relative;
             z-index: 1;
-            opacity: 0;
-            animation: fadeInContent 0.5s ease forwards;
-            animation-delay: 0.2s;
         }
-
-        @keyframes fadeInContent {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         /* ===== HEADER SECTION ===== */
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -555,7 +526,6 @@
             border-radius: 15px;
             font-size: 0.8rem;
             font-weight: 600;
-            z-index: 1;
         }
         .skill-image {
             width: 100%;
@@ -698,6 +668,15 @@
             width: 24px;
             text-align: center;
         }
+        .menu-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: #667eea;
+        }
         /* ===== FOOTER ===== */
         footer {
             text-align: center;
@@ -734,6 +713,11 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
         }
         @keyframes float {
             0%, 100% { transform: translateY(0); }
@@ -819,6 +803,17 @@
                 padding: 1.5rem;
             }
         }
+        /* ===== UTILITY CLASSES ===== */
+        .text-center {
+            text-align: center;
+        }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
         .float {
             animation: float 3s ease-in-out infinite;
         }
@@ -837,17 +832,218 @@
         .menu-items::-webkit-scrollbar-thumb:hover {
             background: #764ba2;
         }
+        .admin-lock {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .lock-icon {
+            color: #667eea;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lock-icon:hover {
+            color: #764ba2;
+            transform: scale(1.1);
+        }
+
+        /* Admin Login Modal */
+        .admin-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .admin-modal.active {
+            display: flex;
+        }
+
+        .admin-login-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+
+        .admin-title {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .admin-input {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .admin-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        /* Admin Dashboard */
+        .admin-dashboard {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1001;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .admin-dashboard.active {
+            display: block;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .logout-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .visitor-item, .comment-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+           /* Animations */
+        @keyframes floatUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: perspective(1000px) translateZ(-100px) rotateX(10deg);
+            }
+            to {
+                opacity: 1;
+                transform: perspective(1000px) translateZ(0) rotateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .heada {
+                font-size: 2.5rem;
+            }
+            
+            .headb {
+                font-size: 1.3rem;
+            }
+            
+            .section-3d {
+                padding: 2rem 1.5rem;
+            }
+            
+            .skills-grid-3d {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    
+   <div class="loader-container" id="loader">
+        <div class="figma-name-animation">Muhammad Asim Shakir</div>
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+        </div>
+        <div style="color: #667eea; margin-top: 2rem; font-size: 1.2rem;">
+            Loading amazing experience...
+        </div>
+    </div>
     <!-- Bottom-Right Floating Menu Toggle -->
     <div class="menu-toggle float" id="menuToggle">
         <div class="menu-line"></div>
         <div class="menu-line"></div>
         <div class="menu-line"></div>
     </div>
-    
     <!-- Floating Menu -->
     <div class="floating-menu" id="floatingMenu">
         <div class="menu-header">
@@ -871,6 +1067,22 @@
                 <i class="fas fa-layer-group"></i>
                 <span>All Skills</span>
             </a>
+            <a href="#tech" class="menu-item" onclick="closeMenu()">
+                <i class="fas fa-code"></i>
+                <span>Technical Skills</span>
+            </a>
+            <a href="#google" class="menu-item" onclick="closeMenu()">
+                <i class="fab fa-google"></i>
+                <span>Google Certifications</span>
+            </a>
+            <a href="#digital" class="menu-item" onclick="closeMenu()">
+                <i class="fas fa-chart-line"></i>
+                <span>Digital Marketing</span>
+            </a>
+            <a href="#arts" class="menu-item" onclick="closeMenu()">
+                <i class="fas fa-pen-nib"></i>
+                <span>Creative Arts</span>
+            </a>
             <a href="#feedback" class="menu-item" onclick="closeMenu()">
                 <i class="fas fa-comment-alt"></i>
                 <span>Feedback & Comments</span>
@@ -879,22 +1091,37 @@
                 <i class="fas fa-envelope-open-text"></i>
                 <span>Contact Me</span>
             </a>
+            <a href="#" class="menu-item" onclick="closeMenu()">
+                <i class="fas fa-file-pdf"></i>
+                <span>Download CV</span>
+            </a>
             <a href="#other_accounts" class="menu-item" onclick="closeMenu()">
                 <i class="fas fa-briefcase"></i>
                 <span>Other Accounts</span>
             </a>
         </div>
     </div>
-    
     <!-- Main Content -->
     <div class="main-content">
         <!-- Header Section -->
         <header id="main" class="header">
             <h1 class="heada">Muhammad &nbsp;Asim&nbsp;Shakir</h1>
             <hr>
-            <h2 class="headb" id="greetingMessage"></h2>
+            <h2 class="headb">Hi, 
+                <script>
+                    function greet() {
+                        let name = prompt("Enter Your Good Name");
+                        if (name && name.trim() !== "") {
+                            document.write(name);
+                        } else {
+                            document.write("Dear Visitor");
+                        }
+                    }
+                    greet();
+                </script>
+                , I'm a Full-Stack Developer, Google Certified Expert & Creative Artist.
+            </h2>
         </header>
-        
         <!-- Hero Section -->
         <section class="hero">
             <img class="mainimage" src="Image_1323.jpeg" alt="Muhammad Asim Shakir">
@@ -939,7 +1166,7 @@
             </div>
         </section>
         
-        <!-- Toolkit Section with Carousel -->
+        <!-- Updated Toolkit Section with Carousel -->
         <section id="toolkit" class="toolkit-section">
             <h2 class="section-title">My Diverse Toolkit</h2>
             
@@ -1078,15 +1305,14 @@
             
             <!-- Skills Categories -->
             <div class="skills-categories">
-                <button class="category-btn active" onclick="filterSkills('all', this)">All Skills</button>
-                <button class="category-btn" onclick="filterSkills('tech', this)">Technical</button>
-                <button class="category-btn" onclick="filterSkills('google', this)">Google Certified</button>
-                <button class="category-btn" onclick="filterSkills('digital', this)">Digital Marketing</button>
-                <button class="category-btn" onclick="filterSkills('arts', this)">Creative Arts</button>
+                <button class="category-btn active" onclick="filterSkills('all')">All Skills</button>
+                <button class="category-btn" onclick="filterSkills('tech')">Technical</button>
+                <button class="category-btn" onclick="filterSkills('google')">Google Certified</button>
+                <button class="category-btn" onclick="filterSkills('digital')">Digital Marketing</button>
+                <button class="category-btn" onclick="filterSkills('arts')">Creative Arts</button>
             </div>
-            
             <!-- Skills Grid -->
-            <div class="skills-grid" id="skillsGrid">
+            <div class="skills-grid" id="tech">
                 <!-- Technical Skills -->
                 <div class="skill-card category-tech" data-category="tech">
                     <div class="skill-badge">Technical</div>
@@ -1103,7 +1329,7 @@
                     <img class="skill-image" src="https://images.unsplash.com/photo-1698919585695-546e4a31fc8f?q=80&w=1031&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Software Engineering">
                     <div class="skill-info">
                         <h3>Software Engineering</h3>
-                        <i>"Software engineer with an eye for detail—both in code and composition."</i>
+                        <i>"Software engineer with an eye for detail—both in code and composition. Approach development like photography: framing problems carefully, focusing on what matters, and delivering pixel-perfect results."</i>
                         <a href="#" class="skill-link">View Certificate <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1131,12 +1357,12 @@
                 </div>
                 
                 <!-- Google Certifications -->
-                <div class="skill-card category-google" data-category="google">
+                <div id="google" class="skill-card category-google" data-category="google">
                     <div class="skill-badge">Google Certified</div>
                     <img class="skill-image" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Google Technical Support">
                     <div class="skill-info">
                         <h3>Cameyo by Google Technical Support</h3>
-                        <i>Certified expert in Google's Cameyo platform for application virtualization</i>
+                        <i>Certified expert in Google's Cameyo platform for application virtualization and technical support</i>
                         <a href="https://edu.exceedlms.com/student/award/WgTVxv9YtpZBS3UtbLeWsR2C" class="skill-link">View Certificate <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1146,7 +1372,7 @@
                     <img class="skill-image" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Google AI">
                     <div class="skill-info">
                         <h3>Google AI for Students</h3>
-                        <i>Certified in implementing AI solutions and machine learning</i>
+                        <i>Certified in implementing AI solutions and machine learning for educational purposes</i>
                         <a href="https://edu.exceedlms.com/student/award/gVwBeDCeaZwrnLvMgnzEfLei" class="skill-link">View Certificate <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1156,7 +1382,7 @@
                     <img class="skill-image" src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AI in Education">
                     <div class="skill-info">
                         <h3>Google AI in Higher Education</h3>
-                        <i>Expert in deploying AI technologies in university settings</i>
+                        <i>Expert in deploying AI technologies in university and higher education settings</i>
                         <a href="https://edu.exceedlms.com/student/award/6VxDNLuJX6YhfMy2gdfbmEne" class="skill-link">View Certificate <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1166,7 +1392,7 @@
                     <img class="skill-image" src="https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Google Admin">
                     <div class="skill-info">
                         <h3>Google Admin Console Management</h3>
-                        <i>Expert in managing Google Workspace and security configurations</i>
+                        <i>Expert in managing Google Workspace, user administration, and security configurations</i>
                         <a href="https://edu.exceedlms.com/student/award/XJEjhLq7sFb1XvkHytDmpXjE" class="skill-link">View Certificate <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1176,29 +1402,28 @@
                     <img class="skill-image" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Premium IT">
                     <div class="skill-info">
                         <h3>Premium IT Features & Management</h3>
-                        <i>Advanced IT infrastructure management</i>
+                        <i>Advanced IT infrastructure management and premium feature implementation</i>
                         <a href="https://edu.exceedlms.com/student/award/FD5v35uJczCLjJuEwaAifcda" class="skill-link">View Certificate <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
                 <!-- Digital Marketing -->
-                <div class="skill-card category-digital" data-category="digital">
+                <div id="digital" class="skill-card category-digital" data-category="digital">
                     <div class="skill-badge">Digital Marketing</div>
                     <img class="skill-image" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Digital Marketing">
                     <div class="skill-info">
                         <h3>Digital Marketing</h3>
-                        <i>Comprehensive digital marketing strategies including SEO, SEM, social media</i>
+                        <i>Comprehensive digital marketing strategies including SEO, SEM, social media, and content marketing</i>
                         <a href="https://www.mindluster.com/student/certificate/a3d910a0" class="skill-link">View Certificate <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-                
-                <!-- Creative Arts -->
-                <div class="skill-card category-arts" data-category="arts">
+                 <!-- Creative Arts -->
+                <div id="arts" class="skill-card category-arts" data-category="arts">
                     <div class="skill-badge">Creative Arts</div>
                     <img class="skill-image" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Creative Writing">
                     <div class="skill-info">
                         <h3>Creative Writing & Content Creation</h3>
-                        <i>Professional content writing, scriptwriting, and creative storytelling</i>
+                        <i>Professional content writing, scriptwriting, blog posts, and creative storytelling</i>
                         <a href="#" class="skill-link">Read Samples <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1259,10 +1484,10 @@
                 <a href="mailto:mr420dinga@gmail.com" class="skill-link" style="margin: 0 10px;">
                     <i class="fas fa-envelope"></i> Email Me
                 </a>
-                <a href="https://wa.me/+923418602436" class="skill-link" style="margin: 0 10px; background: #25D366; border-color: #25D366; color: white;">
+                <a href="https://wa.me/+923418602436" class="skill-link" style="margin: 0 10px; margin-top:10px; background: #25D366; border-color: #25D366; color: white;">
                     <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
-                <a href="tel:+923418602436" class="skill-link" style="margin: 0 10px;">
+                <a href="tel:+923418602436" class="skill-link" style="margin: 0 10px; margin-top:10px;">
                     <i class="fas fa-phone"></i> Call Me
                 </a>
             </div>
@@ -1272,223 +1497,529 @@
         <footer id="other_accounts">
             <div style="max-width: 600px; margin: 0 auto;">
                 <h3 style="color: #667eea; margin-bottom: 1rem;">Thank you for visiting us</h3>
-                <p>Portfolio | Muhammad Asim Shakir &copy;<span id="year"></span></p>
+                <p>| Portfolio of Muhammad Asim Shakir</p>
                 <p class="mt-1" style="font-weight: 600;">Web Developer • Graphic Designer • Video Editor • Google Certified Expert • Digital Marketer • Creative Writer</p>
                 <div class="mt-2">
-                    <a href="https://www.linkedin.com/in/muhammad-asim-shakir-440ab93b0" style="color: #667eea; margin: 0 15px; font-size: 1.3rem;"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.linkedin.com/in/m-asim-shakir-53423a3a6" style="color: #667eea; margin: 0 15px; font-size: 1.3rem;"><i class="fab fa-linkedin"></i></a>
                     <a href="https://www.facebook.com/profile.php?id=61571175178845&mibextid=ZbWKwL" style="color: #667eea; margin: 0 15px; font-size: 1.3rem;"><i class="fab fa-facebook"></i></a>
-                    <a href="#" style="color: #667eea; margin: 0 15px; font-size: 1.3rem;"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/dr_m_asim_shakir?igsh=ZGUzMzM3NWJiOQ==" style="color: #667eea; margin: 0 15px; font-size: 1.3rem;"><i class="fab fa-instagram"></i></a>
                     <a href="#" style="color: #667eea; margin: 0 15px; font-size: 1.3rem;"><i class="fab fa-google"></i></a>
+                </div>
+                <div class="admin-lock">
+                    <div class="lock-icon" onclick="showAdminLogin()">
+                        <i class="fas fa-lock"></i>
+                        <span>Admin Only</span>
+                    </div>
                 </div>
             </div>
         </footer>
+        <div class="admin-modal" id="adminModal">
+        <div class="admin-login-box">
+            <h2 class="admin-title">Admin Login</h2>
+            <input type="email" id="adminEmail" class="admin-input" placeholder="Admin Email">
+            <input type="password" id="adminPassword" class="admin-input" placeholder="Password">
+            <button onclick="adminLogin()" class="admin-btn">Login</button>
+            <div id="adminError" class="error-message">Invalid credentials!</div>
+        </div>
     </div>
 
-    <script>
-        const date = new Date();
-        const yer = date.getfullYear();
-        let year = document.getElementById("year").innerHTML=yer;
-        // Greeting function
-        function greet() {
-            let name = localStorage.getItem('visitorName');
-            if (!name) {
-                name = prompt("Enter Your Good Name");
-                if (name && name.trim() !== "") {
-                    localStorage.setItem('visitorName', name);
+    <!-- Admin Dashboard -->
+    <div class="admin-dashboard" id="adminDashboard">
+        <div class="main-content">
+            <div class="dashboard-header">
+                <h2 style="color: #667eea;">Admin Dashboard</h2>
+                <button onclick="logoutAdmin()" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Visitor Statistics -->
+                <div class="dashboard-card">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">Visitor Statistics</h3>
+                    <div id="visitorStats">
+                        <p>Total Visitors: <span id="totalVisitors">0</span></p>
+                        <p>Today's Visitors: <span id="todayVisitors">0</span></p>
+                    </div>
+                </div>
+                <!-- Visitor List -->
+                <div class="dashboard-card">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">Recent Visitors</h3>
+                    <div id="visitorList">
+                        <!-- Visitor items will be added here -->
+                    </div>
+                </div>
+
+                <!-- Comments Section -->
+                <div class="dashboard-card">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">Recent Comments</h3>
+                    <div id="commentList">
+                        <!-- Comment items will be added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    // Loader functionality
+    window.addEventListener('load', function() {
+        const loader = document.getElementById('loader');
+        
+        // Add particles for loading animation
+        createParticles();
+        
+        // Hide loader after 2 seconds
+        setTimeout(() => {
+            loader.classList.add('hidden');
+        }, 1000);
+    });
+
+    function createParticles() {
+        const loader = document.getElementById('loader');
+        for(let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.cssText = `
+                --tx: ${Math.random() * 100 - 50}px;
+                --ty: ${Math.random() * 100 - 50}px;
+                left: ${Math.random() * 100}%;
+                top: ${Math.random() * 100}%;
+                background: hsl(${Math.random() * 360}, 70%, 60%);
+                animation-delay: ${Math.random() * 2}s;
+            `;
+            loader.appendChild(particle);
+        }
+    }
+
+    // Menu Toggle Functionality
+    const menuToggle = document.getElementById('menuToggle');
+    const floatingMenu = document.getElementById('floatingMenu');
+    let menuOpen = false;
+    
+    function toggleMenu() {
+        menuOpen = !menuOpen;
+        menuToggle.classList.toggle('active');
+        floatingMenu.classList.toggle('active');
+        
+        if (menuOpen) {
+            menuToggle.classList.add('pulse');
+        } else {
+            menuToggle.classList.remove('pulse');
+        }
+    }
+    
+    function closeMenu() {
+        menuOpen = false;
+        menuToggle.classList.remove('active');
+        floatingMenu.classList.remove('active');
+        menuToggle.classList.remove('pulse');
+    }
+
+    // Skills Filtering Functionality
+    function filterSkills(category) {
+        // Update active button
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        
+        // Filter skills
+        const skillCards = document.querySelectorAll('.skill-card');
+        
+        skillCards.forEach(card => {
+            if (category === 'all') {
+                card.style.display = 'block';
+            } else {
+                if (card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
                 } else {
-                    name = "Dear Visitor";
+                    card.style.display = 'none';
                 }
             }
-            document.getElementById('greetingMessage').innerHTML = `Hi, ${name}, I'm a Full-Stack Developer, Google Certified Expert & Creative Artist.`;
-        }
-        
-        // Menu Toggle Functionality
-        const menuToggle = document.getElementById('menuToggle');
-        const floatingMenu = document.getElementById('floatingMenu');
-        let menuOpen = false;
-        
-        function toggleMenu() {
-            menuOpen = !menuOpen;
-            menuToggle.classList.toggle('active');
-            floatingMenu.classList.toggle('active');
-        }
-        
-        function closeMenu() {
-            menuOpen = false;
-            menuToggle.classList.remove('active');
-            floatingMenu.classList.remove('active');
-        }
-        
-        menuToggle.addEventListener('click', toggleMenu);
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const isClickInsideMenu = floatingMenu.contains(event.target);
-            const isClickOnToggle = menuToggle.contains(event.target);
             
-            if (!isClickInsideMenu && !isClickOnToggle && menuOpen) {
+            if (card.style.display === 'block') {
+                card.style.animation = 'fadeIn 0.5s ease-out';
+            }
+        });
+        
+        closeMenu();
+    }
+    
+    // Carousel Functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    const carouselSlides = document.getElementById('carouselSlides');
+    
+    function updateCarousel() {
+        carouselSlides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        dots.forEach((dot, index) => {
+            if (index === currentSlide) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+    
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateCarousel();
+    }
+    
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateCarousel();
+    }
+    
+    function goToSlide(slideIndex) {
+        currentSlide = slideIndex;
+        updateCarousel();
+    }
+    
+    // Auto-slide every 5 seconds
+    let slideInterval = setInterval(nextSlide, 5000);
+    
+    document.querySelector('.toolkit-carousel').addEventListener('mouseenter', () => {
+        clearInterval(slideInterval);
+    });
+    
+    document.querySelector('.toolkit-carousel').addEventListener('mouseleave', () => {
+        slideInterval = setInterval(nextSlide, 5000);
+    });
+
+    // ===== VISITOR AND FEEDBACK MANAGEMENT =====
+    // Initialize visitors and comments arrays
+    let visitors = JSON.parse(localStorage.getItem('portfolioVisitors')) || [];
+    let comments = JSON.parse(localStorage.getItem('portfolioComments')) || [];
+
+    // Track visitor
+    function trackVisitor() {
+        const visitorName = localStorage.getItem('visitorName') || 'Anonymous';
+        const today = new Date().toLocaleDateString();
+        const time = new Date().toISOString();
+        
+        // Check if this visitor already visited today
+        const visitorIndex = visitors.findIndex(v => 
+            v.name === visitorName && v.date === today
+        );
+        
+        if (visitorIndex === -1) {
+            // New visitor for today
+            visitors.push({
+                name: visitorName,
+                date: today,
+                time: time
+            });
+            
+            localStorage.setItem('portfolioVisitors', JSON.stringify(visitors));
+        }
+    }
+
+    // Get visitor name from greeting
+    function getVisitorName() {
+        const name = localStorage.getItem('visitorName');
+        if (name) {
+            document.querySelector('.headb').innerHTML = `Hi, ${name}, I'm a Full-Stack Developer, Google Certified Expert & Creative Artist.`;
+        }
+    }
+
+    // ===== FEEDBACK SUBMISSION =====
+    function submitFeedback() {
+        const userName = document.getElementById('userName').value.trim();
+        const userEmail = document.getElementById('userEmail').value.trim();
+        const userComment = document.getElementById('userComment').value.trim();
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        // Validation
+        if (!userName || !userEmail || !userComment) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(userEmail)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+        
+        // Disable button and show loading
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        
+        // Store feedback locally
+        const feedback = {
+            name: userName,
+            email: userEmail,
+            comment: userComment,
+            date: new Date().toLocaleString()
+        };
+        
+        comments.push(feedback);
+        localStorage.setItem('portfolioComments', JSON.stringify(comments));
+        
+        // Send email using Formspree
+        const formData = new FormData();
+        formData.append('name', userName);
+        formData.append('email', userEmail);
+        formData.append('message', userComment);
+        
+        fetch('https://formspree.io/f/mr420dinga@gmail.com', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Show success message
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+                
+                // Clear form
+                document.getElementById('userName').value = '';
+                document.getElementById('userEmail').value = '';
+                document.getElementById('userComment').value = '';
+                
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            } else {
+                throw new Error('Form submission failed');
+            }
+        })
+        .catch(error => {
+            // Even if email fails, we still stored locally for admin
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+            
+            // Clear form
+            document.getElementById('userName').value = '';
+            document.getElementById('userEmail').value = '';
+            document.getElementById('userComment').value = '';
+            
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Feedback';
+        });
+    }
+
+    // ===== ADMIN DASHBOARD FUNCTIONS =====
+    const ADMIN_EMAIL = 'mr420dinga@gmail.com';
+    const ADMIN_PASSWORD = 'Qwerty@123';
+    
+    function showAdminLogin() {
+        document.getElementById('adminModal').classList.add('active');
+    }
+    
+    function hideAdminLogin() {
+        document.getElementById('adminModal').classList.remove('active');
+        document.getElementById('adminError').style.display = 'none';
+    }
+    
+    function adminLogin() {
+        const email = document.getElementById('adminEmail').value;
+        const password = document.getElementById('adminPassword').value;
+        
+        if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+            hideAdminLogin();
+            showAdminDashboard();
+        } else {
+            document.getElementById('adminError').style.display = 'block';
+        }
+    }
+    
+    function showAdminDashboard() {
+        document.getElementById('adminDashboard').classList.add('active');
+        updateAdminDashboard();
+    }
+    
+    function hideAdminDashboard() {
+        document.getElementById('adminDashboard').classList.remove('active');
+    }
+    
+    function logoutAdmin() {
+        hideAdminDashboard();
+        document.getElementById('adminEmail').value = '';
+        document.getElementById('adminPassword').value = '';
+    }
+    
+    function updateAdminDashboard() {
+        // Update visitor statistics
+        const totalVisitors = visitors.length;
+        const today = new Date().toLocaleDateString();
+        const todayVisitors = visitors.filter(v => v.date === today).length;
+        
+        document.getElementById('totalVisitors').textContent = totalVisitors;
+        document.getElementById('todayVisitors').textContent = todayVisitors;
+        
+        // Update visitor list
+        const visitorList = document.getElementById('visitorList');
+        visitorList.innerHTML = '';
+        
+        const recentVisitors = [...visitors].reverse().slice(0, 10);
+        recentVisitors.forEach(visitor => {
+            const time = new Date(visitor.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            const visitorItem = document.createElement('div');
+            visitorItem.className = 'visitor-item';
+            visitorItem.innerHTML = `
+                <strong>${visitor.name}</strong><br>
+                <small>${visitor.date} • ${time}</small>
+            `;
+            visitorList.appendChild(visitorItem);
+        });
+        
+        // Update comment list
+        const commentList = document.getElementById('commentList');
+        commentList.innerHTML = '';
+        
+        const recentComments = [...comments].reverse().slice(0, 10);
+        recentComments.forEach(comment => {
+            const commentItem = document.createElement('div');
+            commentItem.className = 'comment-item';
+            commentItem.innerHTML = `
+                <strong>${comment.name}</strong> (${comment.email})<br>
+                <p>${comment.comment}</p>
+                <small>${comment.date}</small>
+            `;
+            commentList.appendChild(commentItem);
+        });
+    }
+
+    // ===== EVENT LISTENERS =====
+    menuToggle.addEventListener('click', toggleMenu);
+    
+    document.addEventListener('click', function(event) {
+        const isClickInsideMenu = floatingMenu.contains(event.target);
+        const isClickOnToggle = menuToggle.contains(event.target);
+        
+        if (!isClickInsideMenu && !isClickOnToggle && menuOpen) {
+            closeMenu();
+        }
+    });
+    
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && menuOpen) {
+            closeMenu();
+        }
+    });
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 20,
+                    behavior: 'smooth'
+                });
                 closeMenu();
             }
         });
+    });
+    
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.header');
+        const scrollPosition = window.scrollY;
         
-        // Skills Filtering Functionality
-        function filterSkills(category, button) {
-            // Update active button
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            button.classList.add('active');
-            
-            // Filter skills
-            const skillCards = document.querySelectorAll('.skill-card');
-            
-            skillCards.forEach(card => {
-                if (category === 'all') {
-                    card.style.display = 'block';
-                } else {
-                    if (card.getAttribute('data-category') === category) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }
-            });
+        if (scrollPosition > 50) {
+            header.style.transform = `translateY(${Math.min(scrollPosition * 0.1, 20)}px)`;
+            header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+        } else {
+            header.style.transform = 'translateY(0)';
+            header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.15)';
         }
         
-        // Carousel Functionality
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel-slide');
-        const dots = document.querySelectorAll('.carousel-dot');
-        const carouselSlides = document.getElementById('carouselSlides');
+        updateActiveMenuItem();
+    });
+    
+    function updateActiveMenuItem() {
+        const sections = document.querySelectorAll('section, header');
+        const menuItems = document.querySelectorAll('.menu-item');
         
-        function updateCarousel() {
-            carouselSlides.style.transform = `translateX(-${currentSlide * 100}%)`;
-            
-            dots.forEach((dot, index) => {
-                if (index === currentSlide) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-        }
+        let currentSection = '';
         
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            updateCarousel();
-        }
-        
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            updateCarousel();
-        }
-        
-        function goToSlide(slideIndex) {
-            currentSlide = slideIndex;
-            updateCarousel();
-        }
-        
-        // Auto-slide every 5 seconds
-        let slideInterval = setInterval(nextSlide, 5000);
-        
-        // Pause auto-slide on hover
-        const carousel = document.querySelector('.toolkit-carousel');
-        if (carousel) {
-            carousel.addEventListener('mouseenter', () => {
-                clearInterval(slideInterval);
-            });
-            
-            carousel.addEventListener('mouseleave', () => {
-                slideInterval = setInterval(nextSlide, 5000);
-            });
-        }
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 20,
-                        behavior: 'smooth'
-                    });
-                    closeMenu();
-                }
-            });
-        });
-        
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            greet();
-            updateCarousel();
-            trackVisitor();
-            
-            // Add hover effect to skill cards
-            document.querySelectorAll('.skill-card').forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-            
-            // Form input validation styling
-            document.querySelectorAll('.form-input').forEach(input => {
-                input.addEventListener('input', function() {
-                    if (this.value.trim() !== '') {
-                        this.style.borderColor = '#667eea';
-                    } else {
-                        this.style.borderColor = '#e1e5ee';
-                    }
-                });
-            });
-        });
-        
-        // Track visitor
-        function trackVisitor() {
-            const visitorName = localStorage.getItem('visitorName') || 'Anonymous';
-            const today = new Date().toLocaleDateString();
-            const time = new Date().toISOString();
-            
-            let visitors = JSON.parse(localStorage.getItem('portfolioVisitors')) || [];
-            
-            // Check if this visitor already visited today
-            const visitorIndex = visitors.findIndex(v => 
-                v.name === visitorName && v.date === today
-            );
-            
-            if (visitorIndex === -1) {
-                visitors.push({
-                    name: visitorName,
-                    date: today,
-                    time: time
-                });
-                localStorage.setItem('portfolioVisitors', JSON.stringify(visitors));
-            }
-        }
-        
-        // Parallax effect for header on scroll
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('.header');
-            const scrollPosition = window.scrollY;
-            
-            if (header) {
-                if (scrollPosition > 50) {
-                    header.style.transform = `translateY(${Math.min(scrollPosition * 0.1, 20)}px)`;
-                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
-                } else {
-                    header.style.transform = 'translateY(0)';
-                    header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.15)';
-                }
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.clientHeight;
+            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                currentSection = '#' + section.id;
             }
         });
-    </script>
+        
+        menuItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === currentSection) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    // ===== INITIALIZATION =====
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize with menu closed
+        closeMenu();
+        
+        // Initialize carousel
+        updateCarousel();
+        
+        // Add hover effect to skill cards
+        document.querySelectorAll('.skill-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Initialize form validation
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', function() {
+                if (this.value.trim() !== '') {
+                    this.style.borderColor = '#667eea';
+                } else {
+                    this.style.borderColor = '#e1e5ee';
+                }
+            });
+        });
+        
+        // Initialize active menu item
+        updateActiveMenuItem();
+        
+        // Track visitor and get name
+        getVisitorName();
+        trackVisitor();
+        
+        // Close admin modal when clicking outside
+        document.getElementById('adminModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideAdminLogin();
+            }
+        });
+        
+        // Close admin dashboard with escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideAdminLogin();
+                hideAdminDashboard();
+            }
+        });
+    });
+</script>
 </body>
 </html>
