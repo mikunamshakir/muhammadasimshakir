@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Muhammad Asim Shakir — Portfolio</title>
     <link
       rel="stylesheet"
@@ -36,12 +36,10 @@
         scroll-behavior: smooth;
       }
       body {
-      padding: 1rem;
         background: var(--bg);
         color: var(--text);
         font-family: "DM Sans", sans-serif;
         overflow-x: hidden;
-        cursor: none;
       }
       a {
         text-decoration: none;
@@ -139,36 +137,6 @@
         font-size: 0.9rem;
         letter-spacing: 0.1em;
       }
-      /* CURSOR */
-      .cursor {
-        position: fixed;
-        width: 12px;
-        height: 12px;
-        background: var(--cyan);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9998;
-        transform: translate(-50%, -50%);
-        transition:
-          width 0.3s,
-          height 0.3s;
-        mix-blend-mode: difference;
-      }
-      .cursor-ring {
-        position: fixed;
-        width: 36px;
-        height: 36px;
-        border: 1px solid rgba(0, 245, 212, 0.4);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9997;
-        transform: translate(-50%, -50%);
-        transition:
-          left 0.12s ease,
-          top 0.12s ease,
-          width 0.3s,
-          height 0.3s;
-      }
       /* GRID BG */
       body::before {
         content: "";
@@ -238,7 +206,6 @@
         font-size: 0.8rem;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        cursor: none;
         font-family: "DM Sans", sans-serif;
         transition:
           background 0.3s,
@@ -263,7 +230,6 @@
         align-items: center;
         justify-content: center;
         gap: 5px;
-        cursor: none;
         box-shadow: 0 0 20px rgba(0, 245, 212, 0.4);
         transition: transform 0.3s;
       }
@@ -481,7 +447,6 @@
         font-weight: 600;
         font-size: 0.88rem;
         font-family: "DM Sans", sans-serif;
-        cursor: none;
         transition:
           transform 0.2s,
           box-shadow 0.3s;
@@ -499,7 +464,6 @@
         border-radius: 4px;
         font-size: 0.88rem;
         font-family: "DM Sans", sans-serif;
-        cursor: none;
         transition:
           border-color 0.3s,
           background 0.3s;
@@ -758,7 +722,6 @@
         background: rgba(0, 245, 212, 0.1);
         border: 1px solid rgba(0, 245, 212, 0.3);
         color: var(--cyan);
-        cursor: none;
         font-size: 1rem;
         display: flex;
         align-items: center;
@@ -782,7 +745,6 @@
         border-radius: 50%;
         background: var(--surface2);
         border: 1px solid var(--muted);
-        cursor: none;
         transition: all 0.3s;
       }
       .carousel-dot.active {
@@ -804,7 +766,6 @@
         color: var(--muted);
         font-size: 0.8rem;
         background: transparent;
-        cursor: none;
         transition: all 0.3s;
         font-family: "DM Sans", sans-serif;
       }
@@ -950,7 +911,6 @@
         font-weight: 700;
         font-size: 0.9rem;
         font-family: "DM Sans", sans-serif;
-        cursor: none;
         display: flex;
         align-items: center;
         gap: 8px;
@@ -1133,7 +1093,6 @@
         gap: 8px;
         color: var(--muted);
         font-size: 0.8rem;
-        cursor: none;
         transition: color 0.3s;
       }
       .lock-icon:hover {
@@ -1195,7 +1154,6 @@
         font-size: 0.95rem;
         font-weight: 700;
         font-family: "DM Sans", sans-serif;
-        cursor: none;
         transition: opacity 0.3s;
       }
       .admin-btn:hover {
@@ -1238,7 +1196,6 @@
         border: 1px solid rgba(234, 67, 53, 0.3);
         padding: 8px 18px;
         border-radius: 6px;
-        cursor: none;
         font-family: "DM Sans", sans-serif;
       }
       .dashboard-grid {
@@ -1354,8 +1311,6 @@
     </div>
 
     <div class="scroll-progress" id="scrollProgress"></div>
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
 
     <!-- NAV -->
     <nav>
@@ -2421,36 +2376,7 @@
       const date = new Date();
       const year = date.getFullYear();
       const display = document.getElementById("year").innerHTML = year;
-      // CURSOR
-      const cursor = document.getElementById("cursor"),
-        ring = document.getElementById("cursorRing");
-      document.addEventListener("mousemove", (e) => {
-        cursor.style.left = e.clientX + "px";
-        cursor.style.top = e.clientY + "px";
-        setTimeout(() => {
-          ring.style.left = e.clientX + "px";
-          ring.style.top = e.clientY + "px";
-        }, 80);
-      });
-      document
-        .querySelectorAll(
-          "button,a,.skill-card,.toolkit-item,.contact-btn,.carousel-btn",
-        )
-        .forEach((el) => {
-          el.addEventListener("mouseenter", () => {
-            cursor.style.width = "20px";
-            cursor.style.height = "20px";
-            ring.style.width = "55px";
-            ring.style.height = "55px";
-          });
-          el.addEventListener("mouseleave", () => {
-            cursor.style.width = "12px";
-            cursor.style.height = "12px";
-            ring.style.width = "36px";
-            ring.style.height = "36px";
-          });
-        });
-
+      
       // SCROLL PROGRESS
       window.addEventListener("scroll", () => {
         document.getElementById("scrollProgress").style.width =
